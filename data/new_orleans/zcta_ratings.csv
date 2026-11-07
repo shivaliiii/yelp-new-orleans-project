@@ -1,16 +1,16 @@
-"zip","restaurants","average_business_stars"
-"70130",143,3.76
-"70115",74,3.99
-"70116",62,3.98
-"70119",58,3.83
-"70112",56,3.66
-"70117",40,4.11
-"70118",38,3.82
-"70124",20,3.8
-"70113",18,3.94
-"70122",13,3.5
-"70125",13,3.38
-"70114",7,3.93
-"70126",6,2.67
-"70128",5,2.3
-"70131",5,3.1
+"zip","neighborhoods","restaurants","average_business_stars"
+"70130","Warehouse District & upper Quarter",143,3.76
+"70115","Uptown & Garden District",74,3.99
+"70116","French Quarter & Marigny",62,3.98
+"70119","Mid-City",58,3.83
+"70112","CBD & Tulane-Gravier",56,3.66
+"70117","Bywater & St. Roch",40,4.11
+"70118","Carrollton & Audubon",38,3.82
+"70124","Lakeview",20,3.8
+"70113","Central City",18,3.94
+"70122","Gentilly",13,3.5
+"70125","Broadmoor & Freret",13,3.38
+"70114","Algiers Point",7,3.93
+"70126","New Orleans East",6,2.67
+"70128","New Orleans East",5,2.3
+"70131","Algiers",5,3.1
