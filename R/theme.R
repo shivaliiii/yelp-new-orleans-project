@@ -13,7 +13,8 @@ theme_cols <- list(
   above  = c(deep = "#3E9C83", fill = "#A8E0CC"),   # mint: better than average
   below  = c(deep = "#C9577F", fill = "#F8B5CC"),   # pink: worse than average
   zcta   = c(deep = "#D9844F", fill = "#FFCBA8"),   # peach: ZIP codes
-  tract  = c(deep = "#6C63C7", fill = "#C9C5FF")    # lavender: census tracts
+  tract  = c(deep = "#6C63C7", fill = "#C9C5FF"),   # lavender: census tracts
+  nsa    = c(deep = "#16A07C", fill = "#A8E0CC")    # teal: neighbourhoods
 )
 
 # DM Sans if it is installed, otherwise the default sans-serif font.

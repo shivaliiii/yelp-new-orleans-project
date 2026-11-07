@@ -1,10 +1,11 @@
 # =============================================================================
 # R/compare_systems.R
-# Step 6 (continued): compare ZIP/ZCTA and census tracts on area size and
-# average business rating, using the summaries saved by R/analysis.R.
+# Step 6 (continued): compare ZIP/ZCTA, census tracts and Neighborhood
+# Statistical Areas on area size and average business rating, using the
+# summaries saved by R/analysis.R and R/neighborhoods.R.
 # Also draws the headline chart for the README.
 #
-# Run from the project root, after R/analysis.R:
+# Run from the project root, after R/neighborhoods.R:
 #   Rscript R/compare_systems.R
 # =============================================================================
 
@@ -21,10 +22,12 @@ city_average <- mean(selected_restaurants$stars, na.rm = TRUE)
 
 zcta_summary  <- readRDS("data/new_orleans/zcta_summary.rds")  |> mutate(system = "ZIP codes")
 tract_summary <- readRDS("data/new_orleans/tract_summary.rds") |> mutate(system = "Census tracts")
+nsa_summary   <- readRDS("data/new_orleans/nsa_summary.rds")   |> mutate(system = "Neighborhoods (NSAs)")
 
-areas <- bind_rows(zcta_summary, tract_summary) |>
+system_levels <- c("ZIP codes", "Neighborhoods (NSAs)", "Census tracts")
+areas <- bind_rows(zcta_summary, tract_summary, nsa_summary) |>
   filter(!is.na(area_id)) |>
-  mutate(system = factor(system, levels = c("ZIP codes", "Census tracts")))
+  mutate(system = factor(system, levels = system_levels))
 
 # ---- Table: area size and rating by geographic system -----------------------
 
@@ -108,7 +111,8 @@ save_plot(p_hero, "figures/zip_ratings_chart.png", width = 10, height = 6.4)
 
 # ---- Comparison plot: restaurants per area vs. average rating ---------------
 
-system_colors <- c("ZIP codes" = theme_cols$zcta[["deep"]], "Census tracts" = theme_cols$tract[["deep"]])
+system_colors <- c("ZIP codes" = theme_cols$zcta[["deep"]], "Census tracts" = theme_cols$tract[["deep"]],
+                   "Neighborhoods (NSAs)" = theme_cols$nsa[["deep"]])
 
 p_compare <- ggplot(areas, aes(number_of_restaurants, average_business_stars)) +
   annotate("rect", xmin = 0.8, xmax = min_restaurants - 0.5, ymin = -Inf, ymax = Inf,
@@ -123,7 +127,7 @@ p_compare <- ggplot(areas, aes(number_of_restaurants, average_business_stars)) +
   scale_y_continuous(limits = c(1.4, 5.45), breaks = 1:5) +
   facet_wrap(~ system) +
   labs(
-    title = "Census tracts split the restaurants into tiny areas",
+    title = "Smaller areas mean shakier averages",
     subtitle = paste0("Each dot is one area. Areas with fewer than ", min_restaurants,
                       " restaurants (shaded) swing wildly; dashed line = city average"),
     x = "breakfast & coffee restaurants in the area (log scale)",
@@ -131,7 +135,7 @@ p_compare <- ggplot(areas, aes(number_of_restaurants, average_business_stars)) +
   ) +
   theme_pastel()
 
-save_plot(p_compare, "figures/geographic_system_comparison.png", width = 10, height = 5)
+save_plot(p_compare, "figures/geographic_system_comparison.png", width = 12, height = 5)
 
 message("Saved figures/zip_ratings_chart.png, figures/geographic_system_comparison.png, ",
         "data/new_orleans/system_ratings_comparison.csv, zcta_ratings.csv")

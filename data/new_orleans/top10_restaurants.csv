@@ -1,0 +1,11 @@
+"top_rank","business_name","address","postal_code","reviews_all","avg_stars_all","reviews_eligible","avg_stars_eligible","avg_normalized_score","rank_all_reviewers"
+1,"Swiss Confectionery","3700 Orleans Ave","70119",55,4.42,18,4.56,0.72,70
+2,"Shank Charcuterie","2352 St Claude Ave","70117",44,4.68,10,4.6,0.68,14
+3,"Iacovone Kitchen","5033 Freret St","70115",40,4.85,15,4.87,0.67,2
+4,"Capulet","3014 Dauphine St","70117",50,4.72,16,4.69,0.66,10
+5,"Park Island Brew","1686 Gentilly Blvd","70119",48,4.85,24,4.88,0.63,1
+6,"Cafe Porche and snowbar","1625 Baronne St","70113",176,4.83,13,4.77,0.62,3
+7,"Angelo Brocato","214 N Carrollton Ave","70119",650,4.67,286,4.67,0.61,16
+8,"Celtica French Bakery","218 Robert E Lee Blvd","70124",30,4.77,15,4.8,0.61,5
+9,"Coffee Science","410 S Broad Ave","70119",93,4.7,38,4.84,0.54,12
+10,"Corner Muse","1381 Magazine St","70130",55,4.6,19,4.37,0.52,26

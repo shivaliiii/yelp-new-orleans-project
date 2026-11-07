@@ -1,3 +1,4 @@
 "system","number_of_areas","median_restaurants_per_area","areas_under_5","pct_areas_under_5","restaurants_in_areas_under_5","lowest_area_avg_stars","highest_area_avg_stars"
 "ZIP codes",24,6.5,9,38,17,2.3,4.11
+"Neighborhoods (NSAs)",54,4,28,52,63,3,4.5
 "Census tracts",103,2,75,73,143,3.25,4.5

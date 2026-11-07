@@ -1,0 +1,11 @@
+"direction","business_name","postal_code","number_of_reviews_all_reviewers","average_stars_all_reviewers","number_of_reviews_eligible_reviewers","average_stars_eligible_reviewers","average_normalized_score","rank_all_reviewers","rank_adjusted","rank_change"
+"up","First Cup Cafe","70125",54,3.44,19,4.47,0.51,331,12,319
+"up","Chris' Cakes and Donuts","70128",31,3,11,3.82,0.11,374,142,232
+"up","Rare Form","70116",55,3.85,11,4.27,0.37,251,29,222
+"up","Le Citron Bistro","70130",47,3.81,21,4.1,0.35,260,38,222
+"up","Starbucks","70119",131,3.15,34,4.06,0.02,367,178,189
+"down","The Flying Pig Cafe","70115",52,4.13,10,3.3,-0.56,161,365,-204
+"down","Louise","70117",52,4.21,12,3.83,-0.34,125,320,-195
+"down","Wakin' Bakin'","70115",82,4.23,24,3.79,-0.31,121,307,-186
+"down","Streetcar Cafe","70130",296,4.39,16,4.19,-0.15,74,259,-185
+"down","Gallier Restaurant & Oyster Bar","70112",828,4.29,58,3.88,-0.22,108,278,-170

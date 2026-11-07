@@ -1,5 +1,6 @@
 data/raw/
 data/new_orleans/review_text_new_orleans.rds
+data/new_orleans/*reviews*.rds
 .Rproj.user/
 .Rhistory
 .RData
