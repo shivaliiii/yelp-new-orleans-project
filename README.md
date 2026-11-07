@@ -1,14 +1,10 @@
-# Where’s the Best Breakfast in New Orleans?
+<p align="center">
+  <img src="figures/header.png" alt="Where’s the Best Breakfast in New Orleans? Short version: head just outside downtown. Bywater and St. Roch (ZIP 70117) is the best area, Mid-City (70119) has the most top-10 spots, and Swiss Confectionery is the top-ranked spot." width="100%">
+</p>
 
+<h3 align="center"><a href="https://htmlpreview.github.io/?https://github.com/shivaliiii/yelp-new-orleans-project/blob/main/docs/index.html">Open the full illustrated report →</a></h3>
 
-*Math 167R · Project 2 · Yelp Open Dataset (reviews from 2005 to January
-2022) · 575 breakfast & coffee restaurants · 159,552 reviews*
-
-> **The one-sentence answer:** for the most reliable morning out, head
-> just outside downtown. **Bywater & St. Roch (ZIP 70117)** is the best
-> area overall, **Mid-City (70119)** has the most top-10 spots, and the
-> top-ranked spot after adjusting for reviewer habits is **Swiss
-> Confectionery** on Orleans Avenue.
+<p align="center"><i>Math 167R · Project 2 · Yelp Open Dataset (reviews from 2005 to January 2022) · every chart, map and table, with the code folded under each section</i></p>
 
 ![Map of the top 10 breakfast & coffee restaurants in New Orleans](figures/top10_map.png)
 
@@ -24,6 +20,8 @@
 | 8 | Celtica French Bakery | Lakeview (70124) | 30 | 4.77 | +0.61 | 5th |
 | 9 | Coffee Science | Tulane-Gravier (70119) | 93 | 4.70 | +0.54 | 12th |
 | 10 | Corner Muse | Lower Garden District (70130) | 55 | 4.60 | +0.52 | 26th |
+
+![The top 10 breakfast and coffee spots by reviewer-adjusted score](figures/top10_chart.png)
 
 *Adjusted score: how many stars above their own usual rating active
 reviewers gave the restaurant (explained [below](#adjusting-for-reviewer-habits)).
@@ -87,8 +85,13 @@ for a reliable average.
 The project uses two files from the [Yelp Open
 Dataset](https://business.yelp.com/data/resources/open-dataset/): the
 business file (113 MB, 150,346 businesses) and the review file
-(**5.1 GB, 6,990,280 reviews**). The review file is too big to load into
-memory at once, so:
+(**5.1 GB, 6,990,280 reviews**).
+
+> **In plain English:** the review file is bigger than a laptop’s memory
+> can comfortably hold. So instead of opening it all at once, the code
+> reads it **100,000 reviews at a time**, keeps only the reviews of New
+> Orleans restaurants, and throws the rest away before reading the next
+> batch.
 
 - **Streaming import.** Both files are read with `jsonlite::stream_in()`
   100,000 records at a time. Each batch is cut down to the needed
@@ -117,6 +120,8 @@ gives **2,261** restaurants.
 **Breakfast & coffee.** The category field was split into one row per
 business and category. Four categories describe places you’d go for a
 morning meal or a coffee break:
+
+![Most common restaurant categories, with the four breakfast and coffee categories highlighted](figures/category_chart.png)
 
 | Category | Restaurants |
 |:---|---:|
@@ -168,9 +173,9 @@ city boundary from the U.S. Census (`tigris::places()`):
 | New Orleans | Terrytown | 2 |
 | New Orleans | Kenner | 1 |
 
-The 11 mismatches are restaurants with a New Orleans mailing address
-that sit just outside the city limits in Jefferson Parish. They are real
-nearby options, so they stay in the analysis.
+> **In plain English:** 11 restaurants have a New Orleans mailing
+> address but sit just outside the city limits, in Jefferson Parish.
+> They are real nearby options, so they stay in.
 
 ![Breakfast & coffee restaurants within the New Orleans boundary, coloured by rating](figures/new_orleans_boundary_map.png)
 
@@ -197,7 +202,11 @@ no area to land in.
 
 ![Restaurants per area vs. average rating for ZIP codes, neighbourhoods and census tracts](figures/geographic_system_comparison.png)
 
-**The choice: ZIP codes.**
+> **In plain English:** the smaller the areas, the fewer restaurants
+> each one holds, and the more one restaurant can swing the average.
+> Three out of four census tracts have fewer than 5 breakfast spots.
+
+### The choice: ZIP codes
 
 - **Enough restaurants to compare.** Most tracts and neighbourhoods hold
   only a few breakfast spots, so their averages swing from 1.5 to 5
@@ -239,13 +248,16 @@ reviewers qualify, but they wrote almost a fifth of all reviews. A
 higher threshold gives each reviewer a better baseline but leaves fewer
 restaurants with enough reviews to rank.
 
-**The adjusted score.** For each active reviewer, their usual rating is
-the **mean** of all their breakfast & coffee reviews. Each review is
-then scored as *stars given − reviewer’s usual*. A reviewer who averages
-3 stars and gives a restaurant 4 adds **+1**; a reviewer who averages
-5 and gives 4 adds **−1**. A restaurant’s adjusted score is the average
-over its active-reviewer reviews. It is *not* a new star rating: it
-measures how much better than usual reviewers found the place.
+> **In plain English:** for each reviewer, work out their **usual
+> rating**. Then score every review as *stars given minus that
+> reviewer’s usual*. A reviewer who usually gives 3 stars and gives a
+> place 4 adds **+1**. A reviewer who usually gives 5 and gives 4 adds
+> **−1**. A restaurant’s adjusted score is the average of these. It is
+> *not* a new star rating: it measures how much better than usual
+> reviewers found the place.
+
+Each active reviewer’s usual rating is the **mean** of all their
+breakfast & coffee reviews.
 
 The **mean** was chosen over the median as the baseline because ratings
 are whole stars. With a median baseline, **49%** of reviews get an
@@ -289,9 +301,11 @@ that in mind.
 | 70112 | CBD & Tulane-Gravier | 33 | 42% | 0 | 2 | −0.13 |
 | 70118 | Carrollton & Audubon | 31 | 45% | 0 | 4 | −0.14 |
 
-70113 has the highest share above usual but only 10 ranked restaurants,
-so **70117** is the best-supported answer: it leads on plain Yelp stars
-*and* on the adjusted score.
+70113 has the highest share above usual but only 10 ranked restaurants.
+
+> **Best area: Bywater & St. Roch (70117).** It leads on plain Yelp
+> stars (4.11) *and* on the adjusted score (+0.11), and 60% of its
+> restaurants beat their reviewers’ usual rating.
 
 ## How sure is the top 10?
 
@@ -305,10 +319,10 @@ The top 10 depends on the choices above. Changing one choice at a time:
 | Restaurants need 20+ active-reviewer reviews | 3 of 10 |
 | Plain Yelp average (no adjustment) | 5 of 10 |
 
-The exact list is sensitive, mostly because many top restaurants are
-small, with 10 to 20 active-reviewer reviews. The **area** answer is
-steadier: in every adjusted version, Mid-City (70119) and Bywater &
-Marigny (70117) together hold at least half of the top 10.
+> **In plain English:** the exact list is sensitive, mostly because
+> many top restaurants are small, with 10 to 20 active-reviewer reviews.
+> The **area** answer is steadier: in every adjusted version, Mid-City (70119) and
+> Bywater & Marigny (70117) together hold at least half of the top 10.
 
 ## Limitations
 
@@ -334,9 +348,10 @@ measures, and Mid-City (70119) holds the most top-10 spots. Downtown
 slightly below what their reviewers usually give. Adjusting for reviewer
 habits mostly confirms Yelp’s ratings, but it lifts a few places loved
 by tough reviewers (First Cup Cafe) and drops a few that only easy
-reviewers rate highly. The practical lesson: a high star count from
-hundreds of easy reviewers is weaker evidence than a good score from
-people who are hard to impress.
+reviewers rate highly. 
+> **The practical lesson:** a high star average from hundreds of easy
+> reviewers is weaker evidence than a good score from people who are
+> hard to impress.
 
 ## Repository contents
 
@@ -350,6 +365,10 @@ people who are hard to impress.
 | [`R/compare_systems.R`](R/compare_systems.R) | Area-size comparison plot and ZIP ratings chart |
 | [`R/reviewers.R`](R/reviewers.R) | Reviewer baselines, adjusted scores, top 10 and robustness checks |
 | [`R/maps.R`](R/maps.R) | All maps and the ZIP-level adjusted scores |
+| [`R/charts.R`](R/charts.R) | Category chart and top 10 chart |
+| [`yelp_new_orleans_project.qmd`](yelp_new_orleans_project.qmd) | Quarto source of the illustrated report |
+| [`docs/index.html`](docs/index.html) | The rendered report (self-contained HTML) |
+| [`assets/`](assets/) | Report style and fonts (same design as Project 1) |
 | [`R/theme.R`](R/theme.R) | Shared plot style |
 | [`data/new_orleans/`](data/new_orleans/) | Summary tables (`.csv`) and the import log |
 | [`data/boundaries/`](data/boundaries/) | ZIP code and neighbourhood boundary shapes |
@@ -372,6 +391,8 @@ Rscript R/neighborhoods.R
 Rscript R/compare_systems.R
 Rscript R/reviewers.R
 Rscript R/maps.R
+Rscript R/charts.R
+quarto render yelp_new_orleans_project.qmd --output-dir docs   # the illustrated report
 ```
 
 Packages: `jsonlite`, `dplyr`, `tidyr`, `stringr`, `lubridate`, `sf`,

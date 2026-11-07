@@ -1,0 +1,147 @@
+/*-- scss:defaults --*/
+$font-family-sans-serif: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+$headings-font-family: "Playfair Display", Georgia, serif;
+$font-family-monospace: "JetBrains Mono", ui-monospace, Menlo, monospace;
+$body-color: #4A3F55;
+$body-bg: #FFF8F0;
+$primary: #C08497;
+$link-color: #B76E85;
+$font-size-root: 17px;
+$line-height-base: 1.75;
+$headings-font-weight: 700;
+$code-color: #B76E85;
+$code-bg: #FBEFF2;
+
+/*-- scss:rules --*/
+:root {
+  --accent: #D9844F; --fill: #FFCBA8;
+  --rose: #C08497; --rose-soft: #F8E1E7; --ink: #4A3F55; --muted: #9A8FA6;
+  --cream: #FFF8F0; --card: #FFFFFF; --line: #F1E6DE;
+}
+
+body, p, li, td, th, .table, figcaption, .figure-caption, #TOC, .sidebar, details summary, .tile-label {
+  font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif !important;
+}
+h1, h2, h3, h4, .title, #toc-title, .tile-value { font-family: "Playfair Display", Georgia, serif !important; }
+pre, code, kbd { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace !important; }
+
+body { background: var(--cream); color: var(--ink); }
+main.content { max-width: 900px; }
+
+/* ---- Title banner: pastel gradient card ---- */
+#title-block-header.quarto-title-block {
+  background:
+    radial-gradient(circle at 92% 12%, rgba(255,255,255,.65) 0 70px, transparent 71px),
+    radial-gradient(circle at 80% 95%, rgba(255,255,255,.35) 0 45px, transparent 46px),
+    linear-gradient(135deg, color-mix(in srgb, var(--fill) 85%, white) 0%, #FBE3EA 55%, #FFF1DF 100%);
+  border-radius: 28px;
+  padding: 2.6rem 2.6rem 2.1rem;
+  margin: 1.4rem 0 1.6rem;
+  box-shadow: 0 18px 40px -26px rgba(120, 80, 110, .45);
+  border: 1px solid rgba(255,255,255,.8);
+}
+#title-block-header .title { color: var(--ink); font-size: 2.5rem; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: .5rem; }
+#title-block-header .title::before {
+  content: "Math 167R · Project 2 · Yelp New Orleans"; display: block; font-family: "DM Sans", sans-serif;
+  font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+  font-weight: 700; margin-bottom: .7rem;
+}
+#title-block-header .subtitle { color: #7A6E86; font-family: "Playfair Display", serif !important; font-style: italic; font-size: 1.2rem; font-weight: 600; }
+#title-block-header .quarto-title-meta { display: none; }
+#title-block-header .code-tools-button { color: var(--ink); }
+
+/* ---- Sections become white cards ---- */
+section.level2 {
+  background: var(--card); border-radius: 26px; padding: 1.6rem 2rem 1.3rem;
+  margin: 1.6rem 0; box-shadow: 0 1px 0 var(--line), 0 14px 34px -28px rgba(120, 80, 110, .5);
+  border: 1px solid #F6ECE5;
+}
+h2 { margin-top: 0 !important; border: none !important; font-size: 1.75rem; color: var(--ink); }
+h2 .header-section-number {
+  display: inline-grid; place-items: center; width: 2.1rem; height: 2.1rem; border-radius: 50%;
+  background: var(--fill); color: var(--ink); font-family: "DM Sans", sans-serif; font-size: 1rem;
+  font-weight: 700; margin-right: .6rem; vertical-align: .2rem;
+}
+h3 { font-size: 1.3rem; margin-top: 1.8rem; color: var(--ink); font-style: italic; }
+h3 .header-section-number { color: var(--accent); font-style: normal; margin-right: .4rem; }
+
+a { color: var(--rose); text-decoration-color: var(--rose-soft); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+strong { color: #3B3045; font-weight: 700; }
+main ul li::marker, main ol li::marker { color: var(--accent); }
+
+/* ---- Short version + glance tiles ---- */
+.shortversion {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF4F6 100%);
+  border-radius: 24px; padding: 1.3rem 1.6rem; margin: 0 0 1rem;
+  border: 2px dashed var(--fill); font-size: 1.08rem;
+}
+.shortversion p:first-child::before {
+  content: "The short version"; display: block; font-size: .78rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: .35rem;
+}
+.shortversion p:last-child { margin-bottom: 0; }
+.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .9rem; margin: 1rem 0 .4rem; }
+.tile {
+  background: var(--card); border-radius: 22px; padding: 1rem 1.1rem;
+  box-shadow: 0 12px 26px -22px rgba(120, 80, 110, .55); border: 1px solid #F6ECE5;
+  border-top: 6px solid var(--fill);
+}
+.tile-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+.tile-value { font-size: 1.75rem; color: var(--ink); margin-top: .2rem; line-height: 1.2; }
+
+/* ---- Callout-style "plain English" notes ---- */
+.plain {
+  background: #FFF6EC; border-radius: 18px; padding: .9rem 1.2rem; margin: 1rem 0;
+  border-left: 6px solid #FFCBA8;
+}
+.plain p:first-child::before { content: "In plain English: "; font-weight: 700; color: #D9844F; }
+.plain p:last-child { margin-bottom: 0; }
+
+/* ---- Tables ---- */
+.table-responsive, .cell-output-display:has(table) { border-radius: 18px; }
+table.table {
+  font-size: .86rem; background: #fff; border-radius: 18px; overflow: hidden;
+  border-collapse: separate; border-spacing: 0; box-shadow: 0 0 0 1px #F3E7DF;
+  font-variant-numeric: tabular-nums;
+}
+table.table thead th {
+  background: color-mix(in srgb, var(--fill) 70%, white); color: var(--ink); font-weight: 700;
+  border: none !important; vertical-align: bottom; font-size: .8rem;
+}
+table.table tbody tr:nth-child(even) { background: #FFF9F4; }
+table.table td, table.table th { padding: .5rem .75rem; border-color: #F6EEE8; }
+
+/* ---- Verdict box ---- */
+.decision {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--fill) 55%, white), #FFF1DF);
+  border-radius: 26px; padding: 1.2rem 1.4rem; margin: .4rem 0 .6rem; text-align: center;
+  border: 1px solid rgba(255,255,255,.9); box-shadow: 0 16px 36px -28px rgba(120, 80, 110, .6);
+}
+.decision .math.display { font-size: 1.7rem; color: var(--ink); }
+
+/* ---- Figures & code ---- */
+.cell-output-display img, figure img { background: #fff; border-radius: 20px; padding: 8px; box-shadow: 0 0 0 1px #F3E7DF; }
+.figure-caption, figcaption { color: var(--muted); font-size: .88rem; font-style: italic; text-align: center; }
+details.code-fold summary { color: var(--muted); font-weight: 500; font-size: .82rem; }
+div.sourceCode { border-radius: 16px; border: 1px solid #F3E7DF; background: #FFFBF7 !important; }
+code { font-size: .86em; }
+p code, li code { background: var(--rose-soft); border-radius: 6px; padding: .05rem .35rem; }
+
+/* ---- TOC ---- */
+#TOC { font-size: .88rem; }
+#TOC .nav-link.active, #TOC a.active { color: var(--accent) !important; border-left-color: var(--accent) !important; }
+#toc-title { font-style: italic; color: var(--ink); }
+
+/* Wide tables scroll inside their card instead of being clipped */
+.cell-output-display:has(> table), div.cell-output-display { overflow-x: auto; }
+table.table { min-width: 100%; }
+table.table { font-size: .8rem; }
+table.table td, table.table th { padding: .42rem .55rem; }
+
+/* ---- Yelp project additions ---- */
+.tile-value small { display: block; font-family: "DM Sans", sans-serif !important; font-size: .85rem; color: var(--muted); margin-top: .25rem; line-height: 1.3; }
+.quarto-figure img, p > img.img-fluid { background: #fff; border-radius: 20px; padding: 8px; box-shadow: 0 0 0 1px #F3E7DF; }
+.decision p:first-child { font-family: "Playfair Display", Georgia, serif; font-size: 1.45rem; margin-bottom: .3rem; }
+.decision p:last-child { color: #7A6E86; font-size: .95rem; margin-bottom: 0; }
+blockquote { border-left: 6px solid var(--fill); background: #FFFBF7; border-radius: 14px; padding: .8rem 1.1rem; color: var(--ink); font-size: 1.05rem; }
+blockquote p { margin-bottom: 0; }
