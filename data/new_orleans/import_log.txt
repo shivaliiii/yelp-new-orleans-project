@@ -1,0 +1,5 @@
+15:25:16  Business JSON: 113.4 MB | Review JSON: 5094.4 MB
+15:25:30  Businesses read: 150,346 | in Louisiana: 9,924 | 14 s
+15:25:30  New Orleans restaurants: 2,261
+15:31:20  Reviews scanned: 6,990,280 | kept for New Orleans restaurants: 476,565 | 5.8 min
+15:36:42  Saved business_new_orleans.rds (0.1 MB), reviews_new_orleans.rds (15.3 MB), review_text_new_orleans.rds (71.2 MB)

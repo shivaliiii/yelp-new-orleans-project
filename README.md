@@ -12,7 +12,8 @@ yelp-new-orleans-project/
 ├── R/
 │   ├── import.R            # Step 1: unzip, stream-import, filter to New Orleans, save RDS
 │   ├── clean.R              # Steps 3-4: select categories, join to reviews
-│   └── analysis.R           # Steps 5-6: spatial join + geographic comparison
+│   ├── analysis.R           # Steps 5-6: spatial join + geographic comparison
+│   └── compare_systems.R    # Step 6: area size and rating comparison plot
 ├── data/
 │   ├── raw/                # Yelp JSON files go here (not committed to GitHub)
 │   └── new_orleans/        # filtered, compressed outputs
@@ -75,7 +76,7 @@ Of the 2,261 New Orleans restaurants, the category field was split into one row 
 
 **Inclusion rule:** a restaurant qualifies if it has *at least one* of the four categories above.
 
-**Qualifying restaurants:** 575, spanning 24 ZIP codes — well above the assignment's minimum of 10 restaurants across 7 areas.
+**Qualifying restaurants:** 575, spanning 25 postal ZIP codes (24 Census ZCTAs) — well above the assignment's minimum of 10 restaurants across 7 areas.
 
 Code: [`R/clean.R`](R/clean.R). Full category counts: [`data/new_orleans/category_counts.csv`](data/new_orleans/category_counts.csv).
 
@@ -103,19 +104,50 @@ Each restaurant's latitude/longitude was converted to a spatial point and joined
 
 ## Step 6: Geographic system comparison
 
-Two geographic systems were compared for dividing up the area:
+Two geographic systems were compared for dividing up the area: ZIP Code Tabulation Areas (ZCTAs, from `tigris::zctas()`) and census tracts (Orleans Parish, from `tigris::tracts()`). Each restaurant point was assigned to an area with `st_join(..., join = st_within)`.
 
 | Geographic system | Number of areas | Restaurants assigned | Unmatched restaurants | Smallest area count | Largest area count |
 |---|---:|---:|---:|---:|---:|
 | ZIP/ZCTA | 24 | 575 | 0 | 1 | 143 |
 | Census tract | 103 | 564 | 11 | 1 | 117 |
 
-**Selected system: ZIP/ZCTA.** ZIP codes are immediately understandable to a general audience (unlike census tract numbers), matched every single restaurant with zero unmatched points, and — with only 24 areas instead of 103 — keep enough restaurants per area for the counts and ratings to be meaningful. Census tracts fragment the same 575 restaurants into more than four times as many areas, several with very few restaurants, which would make area-to-area comparisons noisy.
+The 11 unmatched tract restaurants are the same 11 that fall just outside the city limits (Step 5). Only Orleans Parish tracts were loaded, so they have no tract to land in.
 
-ZIP codes are not perfect either. They are postal areas, not neighborhoods, and they vary a lot in size: the smallest has only 1 qualifying restaurant while the largest has 143. ZIP codes with fewer than 5 qualifying restaurants will be shown on maps but not ranked, since one or two restaurants can't support a reliable area average.
+**Area size and ratings.** Averages are only shown for areas with at least 5 restaurants.
+
+| Geographic system | Median restaurants per area | Areas with fewer than 5 restaurants | Range of area average stars |
+|---|---:|---:|---:|
+| ZIP/ZCTA | 6.5 | 9 of 24 (38%) | 2.30 – 4.11 |
+| Census tract | 2 | 75 of 103 (73%) | 3.25 – 4.50 |
+
+![Restaurants per area vs. average rating, ZIP/ZCTA and census tracts](figures/geographic_system_comparison.png)
+
+**Selected system: ZIP/ZCTA.** ZIP codes are easy for a general reader to understand (unlike census tract numbers), and every restaurant was matched to one. Most importantly, they leave enough restaurants per area to compare. Census tracts split the same restaurants into 103 areas, and nearly three-quarters of them have fewer than 5 restaurants. In those tracts, one or two restaurants decide the "average," which is why tract averages swing from 1.5 to 5 stars in the plot above.
+
+ZIP codes are not perfect either. They are postal areas, not neighborhoods, and they vary a lot in size: 9 ZIP codes have fewer than 5 qualifying restaurants (17 restaurants in total). Those ZIP codes will be shown on maps but not ranked.
 
 ![Breakfast & coffee restaurant counts by ZIP code](figures/zcta_restaurant_count_map.png)
 
-One ZCTA (the French Quarter / CBD area) clearly stands out with the most breakfast & coffee options — this will be explored further in the final writeup once reviewer-adjusted scores (Step 7) are added.
+**ZIP codes with at least 5 breakfast & coffee restaurants:**
 
-Code: [`R/analysis.R`](R/analysis.R). Full comparison table: [`data/new_orleans/geographic_comparison.csv`](data/new_orleans/geographic_comparison.csv).
+| ZIP | Restaurants | Average business stars |
+|---|---:|---:|
+| 70130 | 143 | 3.76 |
+| 70115 | 74 | 3.99 |
+| 70116 | 62 | 3.98 |
+| 70119 | 58 | 3.83 |
+| 70112 | 56 | 3.66 |
+| 70117 | 40 | 4.11 |
+| 70118 | 38 | 3.82 |
+| 70124 | 20 | 3.80 |
+| 70113 | 18 | 3.94 |
+| 70122 | 13 | 3.50 |
+| 70125 | 13 | 3.38 |
+| 70114 | 7 | 3.93 |
+| 70126 | 6 | 2.67 |
+| 70128 | 5 | 2.30 |
+| 70131 | 5 | 3.10 |
+
+ZIP 70130 has by far the most breakfast & coffee options (143), but not the highest average rating. Among the larger ZIP codes, 70117 (4.11) and 70115 (3.99) rate highest. Whether that holds up after adjusting for reviewer habits is the question for Step 7.
+
+Code: [`R/analysis.R`](R/analysis.R) and [`R/compare_systems.R`](R/compare_systems.R). Tables: [`geographic_comparison.csv`](data/new_orleans/geographic_comparison.csv), [`system_ratings_comparison.csv`](data/new_orleans/system_ratings_comparison.csv), [`zcta_ratings.csv`](data/new_orleans/zcta_ratings.csv).
