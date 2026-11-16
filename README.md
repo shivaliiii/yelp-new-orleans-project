@@ -365,8 +365,6 @@ reviewers rate highly.
 
 I used **Claude** (Anthropic's AI assistant) to write and debug R code, style the charts and report, and check my work against the assignment. Commits written with Claude are marked `Co-Authored-By: Claude` in the repository history.
 
-**Example of reprompting.** I first asked Claude to open the assignment on Canvas and help my project stand out. It couldn't open the instructions file there, so its suggestions were generic. I reprompted by uploading the instructions file directly and asking it to check my repository against them. With the real requirements in hand, it went through all 10 deliverables one by one and found what was still missing.
-
 ## Repository contents
 
 | File | What’s inside |
