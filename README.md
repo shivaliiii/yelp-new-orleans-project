@@ -365,6 +365,8 @@ reviewers rate highly.
 
 I used **Claude** (Anthropic's AI assistant) to write and debug R code, style the charts and report, and check my work against the assignment. Commits written with Claude are marked `Co-Authored-By: Claude` in the repository history.
 
+**Example of reprompting.** After I uploaded the project instructions, Claude finished Step 7 and the top 10, but the report looked plain. I reprompted with *"i told u it needs to look like monte carlo project, put in pretty graphs and amke writing stand out"*. Pointing it to a concrete example worked: it restyled the report to match my Project 1 and added two new charts.
+
 ## Repository contents
 
 | File | What’s inside |
