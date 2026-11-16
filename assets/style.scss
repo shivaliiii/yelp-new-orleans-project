@@ -35,7 +35,7 @@ main.content { max-width: 900px; }
   background:
     radial-gradient(circle at 92% 12%, rgba(255,255,255,.65) 0 70px, transparent 71px),
     radial-gradient(circle at 80% 95%, rgba(255,255,255,.35) 0 45px, transparent 46px),
-    radial-gradient(circle at 8% 88%, rgba(189,240,222,.9) 0 34px, transparent 35px),
+    radial-gradient(circle at 99% 99%, rgba(189,240,222,.95) 0 48px, transparent 49px),
     linear-gradient(135deg, #FFD6E5 0%, #E3D9FF 50%, #D4ECFF 100%);
   border-radius: 28px;
   padding: 2.6rem 2.6rem 2.1rem;
@@ -90,7 +90,7 @@ main ul li::marker, main ol li::marker { color: var(--accent); }
   border-top: 7px solid var(--fill);
 }
 .tile-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
-.tile-value { font-size: 1.75rem; color: var(--ink); margin-top: .2rem; line-height: 1.2; }
+.tile-value { font-size: 1.5rem; overflow-wrap: anywhere; color: var(--ink); margin-top: .2rem; line-height: 1.2; }
 
 /* ---- Callout-style "plain English" notes ---- */
 .plain {
