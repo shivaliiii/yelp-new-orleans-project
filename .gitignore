@@ -4,3 +4,6 @@ data/new_orleans/*reviews*.rds
 .Rproj.user/
 .Rhistory
 .RData
+
+/.quarto/
+**/*.quarto_ipynb

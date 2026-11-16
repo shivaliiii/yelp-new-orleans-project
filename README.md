@@ -332,6 +332,21 @@ The top 10 depends on the choices above. Changing one choice at a time:
 > The **area** answer is steadier: in every adjusted version, Mid-City (70119) and
 > Bywater & Marigny (70117) together hold at least half of the top 10.
 
+**Is it luck?** The table above changes the *rules*. A second question is how much the list depends on *chance*: which active reviewers happened to visit each place. To test this, each ranked restaurant's reviews were **bootstrapped**: resampled with replacement 2,000 times. Each time the scores were recalculated and all 394 restaurants re-ranked.
+
+![The top 10 with 95% bootstrap intervals and how often each stays in the top 10](figures/top10_bootstrap.png)
+
+> **In plain English:** All ten intervals stay **above zero**, so every top-10 spot is rated above its reviewers' usual even in unlucky resamples. **Angelo Brocato is the safest pick** (top 10 in 81% of resamples): 286 active-reviewer reviews pin its score down. Most of the others rest on 10 to 24 reviews, so their intervals are wide. Places **9 and 10** (Coffee Science and Corner Muse) make the top 10 in fewer than 40% of resamples. That is about as often as Pepperoni Ray's Cafe (33%) and First Cup Cafe (25%) just outside it.
+
+**Does the area answer survive?** Across the same 2,000 resamples:
+
+| Check | Share of resamples |
+|:---|---:|
+| Mid-City (70119) has the most top-10 spots (ties included) | **86%** |
+| Mid-City (70119) and Bywater & Marigny (70117) hold at least half of the top 10 | 69% |
+| Bywater & Marigny (70117) has the most top-10 spots (ties included) | 33% |
+| Downtown (70130) has the most top-10 spots (ties included) | 4% |
+
 ## Limitations
 
 - **The data stops in January 2022.** Some restaurants may have closed
@@ -342,8 +357,8 @@ The top 10 depends on the choices above. Changing one choice at a time:
 - **Active reviewers are a small group.** The adjusted score rests on
   3.5% of reviewers. Their tastes may differ from a typical visitor’s.
 - **Small samples.** Restaurants need only 10 active-reviewer reviews to
-  be ranked, so the exact order of the top 10 could change with more
-  data.
+  be ranked. The bootstrap shows the exact order is uncertain, though
+  the area answer holds up better.
 - **ZIP codes are not neighbourhoods.** A ZIP code average mixes very
   different streets.
 
@@ -376,6 +391,7 @@ I used **Claude** (Anthropic's AI assistant) to write and debug R code, style th
 | [`R/neighborhoods.R`](R/neighborhoods.R) | Neighbourhood spatial join and the three-system comparison table |
 | [`R/compare_systems.R`](R/compare_systems.R) | Area-size comparison plot and ZIP ratings chart |
 | [`R/reviewers.R`](R/reviewers.R) | Reviewer baselines, adjusted scores, top 10 and robustness checks |
+| [`R/bootstrap.R`](R/bootstrap.R) | Bootstrap intervals for the top 10 and the area check |
 | [`R/maps.R`](R/maps.R) | All maps and the ZIP-level adjusted scores |
 | [`R/charts.R`](R/charts.R) | Category chart and top 10 chart |
 | [`yelp_new_orleans_project.qmd`](yelp_new_orleans_project.qmd) | Quarto source of the illustrated report |
@@ -406,6 +422,7 @@ Rscript R/boundaries.R
 Rscript R/neighborhoods.R
 Rscript R/compare_systems.R
 Rscript R/reviewers.R
+Rscript R/bootstrap.R          # 2,000 resamples, under a minute
 Rscript R/maps.R
 Rscript R/charts.R
 quarto render yelp_new_orleans_project.qmd --output-dir docs   # the illustrated report
