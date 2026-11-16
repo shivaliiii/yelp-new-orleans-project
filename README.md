@@ -2,7 +2,7 @@
   <img src="figures/header.png" alt="Where’s the Best Breakfast in New Orleans? Short version: head just outside downtown. Bywater and St. Roch (ZIP 70117) is the best area, Mid-City (70119) has the most top-10 spots, and Swiss Confectionery is the top-ranked spot." width="100%">
 </p>
 
-<h3 align="center"><a href="https://htmlpreview.github.io/?https://github.com/shivaliiii/yelp-new-orleans-project/blob/main/docs/index.html">Open the full illustrated report →</a></h3>
+<h3 align="center"><a href="https://shivaliiii.github.io/yelp-new-orleans-project/">Open the full illustrated report →</a></h3>
 
 <p align="center"><i>Math 167R · Project 2 · Yelp Open Dataset (reviews from 2005 to January 2022) · every chart, map and table, with the code folded under each section</i></p>
 
@@ -420,6 +420,10 @@ Short, vague prompts got generic work. The results got much better when I gave C
 | [`data/new_orleans/`](data/new_orleans/) | Summary tables (`.csv`) and the import log |
 | [`data/boundaries/`](data/boundaries/) | ZIP code and neighbourhood boundary shapes |
 | [`figures/`](figures/) | Every chart and map in this README |
+
+### Viewing the report
+
+The full report is published with GitHub Pages at **<https://shivaliiii.github.io/yelp-new-orleans-project/>**. It is the rendered file [`docs/index.html`](docs/index.html), so nothing needs to be run to see it. GitHub Pages publishes it from the `docs/` folder of the `main` branch.
 
 ### Reproducing the results
 
