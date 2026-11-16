@@ -6,6 +6,13 @@
 
 <p align="center"><i>Math 167R · Project 2 · Yelp Open Dataset (reviews from 2005 to January 2022) · every chart, map and table, with the code folded under each section</i></p>
 
+<p align="center">
+  <img alt="R" src="https://img.shields.io/badge/R-tidyverse%20%C2%B7%20sf%20%C2%B7%20ggplot2-8B6CF0?style=for-the-badge&logo=r&logoColor=white">
+  <img alt="Quarto" src="https://img.shields.io/badge/Quarto-report-F0608E?style=for-the-badge&logo=quarto&logoColor=white">
+  <img alt="Data" src="https://img.shields.io/badge/Yelp-7M%20reviews-2FB38A?style=for-the-badge&logo=yelp&logoColor=white">
+  <img alt="Method" src="https://img.shields.io/badge/bootstrap-2%2C000%20resamples-4FA3E3?style=for-the-badge">
+</p>
+
 ![Map of the top 10 breakfast & coffee restaurants in New Orleans](figures/top10_map.png)
 
 | Rank | Restaurant | Neighbourhood (ZIP) | Yelp reviews | Average stars | Adjusted score | Rank on plain stars |
@@ -28,13 +35,14 @@ reviewers gave the restaurant (explained [below](#adjusting-for-reviewer-habits)
 “Rank on plain stars” is the same restaurant’s rank by ordinary Yelp
 average among the 394 ranked restaurants.*
 
-## What this project is about
+## 🥐 What this project is about
 
 New Orleans is famous for its breakfasts: beignets, brunch and chicory
 coffee. But with one morning to spare, **where should you go?**
 
 This project uses the Yelp Open Dataset to answer one question:
 
+> [!NOTE]
 > **Where can someone find the best breakfast and coffee in New Orleans,
 > and which area of the city is best for finding it?**
 
@@ -50,7 +58,7 @@ others almost never do. So “best” here means:
 3. **For areas:** lots of good options, and restaurants that are rated
    above reviewers’ usual more often than not.
 
-## Key findings
+## ✨ Key findings
 
 **1. The best area is Bywater & St. Roch (70117).** Its restaurants
 have the highest average Yelp stars of any ZIP code with at least 5
@@ -80,13 +88,14 @@ question.** Census tracts and city neighbourhoods split the restaurants
 so finely that most areas have fewer than 5 breakfast spots, too few
 for a reliable average.
 
-## The data and how the large files were handled
+## 📦 The data and how the large files were handled
 
 The project uses two files from the [Yelp Open
 Dataset](https://business.yelp.com/data/resources/open-dataset/): the
 business file (113 MB, 150,346 businesses) and the review file
 (**5.1 GB, 6,990,280 reviews**).
 
+> [!TIP]
 > **In plain English:** the review file is bigger than a laptop’s memory
 > can comfortably hold. So instead of opening it all at once, the code
 > reads it **100,000 reviews at a time**, keeps only the reviews of New
@@ -117,7 +126,7 @@ business file (113 MB, 150,346 businesses) and the review file
 Full log of row counts and run times:
 [`import_log.txt`](data/new_orleans/import_log.txt).
 
-## Choosing the restaurants
+## ☕ Choosing the restaurants
 
 **New Orleans restaurants.** A business counts if `state` is `LA`, its
 `city` is “New Orleans”, and its categories include “Restaurants”. That
@@ -158,14 +167,14 @@ codes (24 Census ZIP areas), well above the required 10 restaurants in
 All category counts:
 [`category_counts.csv`](data/new_orleans/category_counts.csv).
 
-## Joining the reviews
+## 🔗 Joining the reviews
 
 Reviews were filtered to the 575 selected restaurants (joined on
 `business_id`) before any further analysis, instead of carrying all
 476,565 New Orleans restaurant reviews forward. That leaves **159,552
 reviews** from 97,950 different reviewers.
 
-## Checking the city boundary
+## 🗺️ Checking the city boundary
 
 Yelp’s `city` field is just text typed by the business. To check it,
 each restaurant’s latitude and longitude were matched to the official
@@ -181,13 +190,14 @@ city boundary from the U.S. Census (`tigris::places()`):
 | New Orleans | Terrytown | 2 |
 | New Orleans | Kenner | 1 |
 
+> [!TIP]
 > **In plain English:** 11 restaurants have a New Orleans mailing
 > address but sit just outside the city limits, in Jefferson Parish.
 > They are real nearby options, so they stay in.
 
 ![Breakfast & coffee restaurants within the New Orleans boundary, coloured by rating](figures/new_orleans_boundary_map.png)
 
-## Choosing a geographic system
+## 📍 Choosing a geographic system
 
 To compare areas, the city has to be divided up somehow. Three systems
 were tested, and each restaurant was assigned to an area with a spatial
@@ -210,6 +220,7 @@ no area to land in.
 
 ![Restaurants per area vs. average rating for ZIP codes, neighbourhoods and census tracts](figures/geographic_system_comparison.png)
 
+> [!TIP]
 > **In plain English:** the smaller the areas, the fewer restaurants
 > each one holds, and the more one restaurant can swing the average.
 > Three out of four census tracts have fewer than 5 breakfast spots.
@@ -235,7 +246,9 @@ restaurants in total) are mapped but not ranked.
 
 ![Average Yelp stars of breakfast & coffee restaurants by ZIP code](figures/zip_ratings_chart.png)
 
-## Adjusting for reviewer habits
+<a id="adjusting-for-reviewer-habits"></a>
+
+## ⚖️ Adjusting for reviewer habits
 
 Some reviewers give almost every restaurant five stars; others rarely
 do. A 4-star review means more from a tough reviewer than from an easy
@@ -256,6 +269,7 @@ reviewers qualify, but they wrote almost a fifth of all reviews. A
 higher threshold gives each reviewer a better baseline but leaves fewer
 restaurants with enough reviews to rank.
 
+> [!TIP]
 > **In plain English:** for each reviewer, work out their **usual
 > rating**. Then score every review as *stars given minus that
 > reviewer’s usual*. A reviewer who usually gives 3 stars and gives a
@@ -311,11 +325,12 @@ that in mind.
 
 70113 has the highest share above usual but only 10 ranked restaurants.
 
+> [!IMPORTANT]
 > **Best area: Bywater & St. Roch (70117).** It leads on plain Yelp
 > stars (4.11) *and* on the adjusted score (+0.11), and 60% of its
 > restaurants beat their reviewers’ usual rating.
 
-## How sure is the top 10?
+## 🎲 How sure is the top 10?
 
 The top 10 depends on the choices above. Changing one choice at a time:
 
@@ -327,6 +342,7 @@ The top 10 depends on the choices above. Changing one choice at a time:
 | Restaurants need 20+ active-reviewer reviews | 3 of 10 |
 | Plain Yelp average (no adjustment) | 5 of 10 |
 
+> [!TIP]
 > **In plain English:** the exact list is sensitive, mostly because
 > many top restaurants are small, with 10 to 20 active-reviewer reviews.
 > The **area** answer is steadier: in every adjusted version, Mid-City (70119) and
@@ -336,6 +352,7 @@ The top 10 depends on the choices above. Changing one choice at a time:
 
 ![The top 10 with 95% bootstrap intervals and how often each stays in the top 10](figures/top10_bootstrap.png)
 
+> [!TIP]
 > **In plain English:** All ten intervals stay **above zero**, so every top-10 spot is rated above its reviewers' usual even in unlucky resamples. **Angelo Brocato is the safest pick** (top 10 in 81% of resamples): 286 active-reviewer reviews pin its score down. Most of the others rest on 10 to 24 reviews, so their intervals are wide. Places **9 and 10** (Coffee Science and Corner Muse) make the top 10 in fewer than 40% of resamples. That is about as often as Pepperoni Ray's Cafe (33%) and First Cup Cafe (25%) just outside it.
 
 **Does the area answer survive?** Across the same 2,000 resamples:
@@ -347,7 +364,7 @@ The top 10 depends on the choices above. Changing one choice at a time:
 | Bywater & Marigny (70117) has the most top-10 spots (ties included) | 33% |
 | Downtown (70130) has the most top-10 spots (ties included) | 4% |
 
-## Limitations
+## ⚠️ Limitations
 
 - **The data stops in January 2022.** Some restaurants may have closed
   or changed since then.
@@ -362,7 +379,7 @@ The top 10 depends on the choices above. Changing one choice at a time:
 - **ZIP codes are not neighbourhoods.** A ZIP code average mixes very
   different streets.
 
-## Conclusion
+## 🍩 Conclusion
 
 For breakfast and coffee in New Orleans, the best area is **just outside
 downtown**. Bywater & St. Roch (70117) has the highest ratings on both
@@ -372,15 +389,16 @@ slightly below what their reviewers usually give. Adjusting for reviewer
 habits mostly confirms Yelp’s ratings, but it lifts a few places loved
 by tough reviewers (First Cup Cafe) and drops a few that only easy
 reviewers rate highly. 
+> [!IMPORTANT]
 > **The practical lesson:** a high star average from hundreds of easy
 > reviewers is weaker evidence than a good score from people who are
 > hard to impress.
 
-## How I used AI
+## 🤖 How I used AI
 
 I used **Claude** (Anthropic's AI assistant) to write and debug R code, style the charts and report, and check my work against the assignment. Commits written with Claude are marked `Co-Authored-By: Claude` in the repository history.
 
-## Repository contents
+## 📁 Repository contents
 
 | File | What’s inside |
 |:---|:---|
