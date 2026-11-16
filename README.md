@@ -108,6 +108,12 @@ business file (113 MB, 150,346 businesses) and the review file
   more than GitHub allows. They are listed in `.gitignore` and can be deleted once the `.rds`
   files are saved.
 
+**Problems along the way, and how they were solved.**
+
+- **The download was huge and slow.** The Yelp archive (`Yelp-JSON.zip`) is about 4 GB, and downloading it took a long time. To avoid repeating that, the archive was downloaded **once** into `data/raw/`. The import script takes only the two JSON files it needs out of the archive, and skips that step if they are already there.
+- **The review file is too big to open at once.** Reading the 5.1 GB file in one go would need more memory than a laptop comfortably has. Reading it in 100,000-review batches keeps memory use small. If a computer still runs short, `page_size` at the top of `R/import.R` can be lowered.
+- **Keeping the raw files around costs disk space.** Once the filtered `.rds` files (about 87 MB in total) were saved and read back, the multi-gigabyte raw files were no longer needed for the rest of the analysis. `R/import.R` can delete them by setting `delete_raw_files <- TRUE`.
+
 Full log of row counts and run times:
 [`import_log.txt`](data/new_orleans/import_log.txt).
 
@@ -116,6 +122,8 @@ Full log of row counts and run times:
 **New Orleans restaurants.** A business counts if `state` is `LA`, its
 `city` is “New Orleans”, and its categories include “Restaurants”. That
 gives **2,261** restaurants.
+
+**Missing values.** None of the 2,261 restaurants is missing a latitude, longitude, category list or star rating, so none had to be dropped. One has a blank postal code (recoded to `NA`) and 39 have a blank street address. Neither matters here, because each restaurant is placed in an area from its coordinates with a spatial join, not from its postal code. Among the 575 breakfast & coffee restaurants, none is missing a postal code and 2 have a blank address. All 159,552 of their reviews have a star rating, date, reviewer ID and business ID.
 
 **Breakfast & coffee.** The category field was split into one row per
 business and category. Four categories describe places you’d go for a
@@ -352,6 +360,45 @@ reviewers rate highly.
 > **The practical lesson:** a high star average from hundreds of easy
 > reviewers is weaker evidence than a good score from people who are
 > hard to impress.
+
+## How I used AI
+
+I used **Claude** (Anthropic's AI assistant) throughout this project, mainly to write and debug R code, design charts and maps, and check my work against the assignment. Commits written with Claude are marked `Co-Authored-By: Claude` in the repository history.
+
+**What I used it for**
+
+- Checking my Step 1–6 README against the Homework 6 checkpoint, and pushing the code to GitHub.
+- Step 7: reviewer baselines, adjusted scores, the top 10 and the final map with ZIP code boundaries.
+- Adding a third geographic system (city neighbourhoods) and the robustness checks on the top 10.
+- Styling the charts, maps and report to match my Project 1 report.
+- Checking the finished repository against the project instructions.
+
+**Specific prompts and how I reprompted**
+
+**Example 1: the Homework 6 checkpoint**
+
+- **First prompt:** *"can u look at my canvas i wanna finish homework 6 on canvas"*
+- **What happened:** Claude found that Homework 6 was a checkpoint on Project 2 (Steps 1–6). It asked me to pick a theme, and I chose breakfast / coffee / bakeries. I then uploaded my README. Claude caught two mistakes in it: it said "25 ZIP codes" where my table had 24 areas, and it called all ~7 million reviews "Louisiana-area reviews". It also listed Step 6 items I was still missing, and noticed my GitHub repo was empty.
+- **How I reprompted:** I sent the repo link, but it was still empty. Claude gave me git commands to run, and I replied *"idk im confused"*.
+- **What changed:** Instead of more instructions, Claude walked me through getting the code onto GitHub, and the Step 1–6 work was pushed.
+
+**Example 2: making the report stand out**
+
+- **First prompt:** I uploaded the project instructions and wrote *"i want to get done w the projecr"*.
+- **What happened:** Claude finished Step 7, the top 10 with a final map, the README, and a third geographic system. But the report was plain and didn't look like my Project 1.
+- **How I reprompted:** *"i told u it needs to look like monte carlo project, put in pretty graphs and amke writing stand out"*
+- **What changed:** Claude reused my Project 1 style file and fonts, added two new charts (the ranked top 10 and the category chart), and added "In plain English" boxes. It also made a header image for the README, because GitHub can't show custom styling there.
+
+**Example 3: a final check against the assignment**
+
+- **First prompt:** *"can u access my canvas and i have math 167r project 2 due today and i need ur help to make my project stand out"*
+- **What went wrong:** Claude found the assignment and read my repository, but couldn't open the instructions file from Canvas. Its suggestions were general ideas, not a check against the actual requirements.
+- **How I reprompted:** I gave it the instructions file directly.
+- **What changed:** Claude checked the project against all 10 required deliverables. It found that this AI-prompts section was missing and that the large-data section described my solutions but not the problems I ran into. It asked what problems I actually had instead of inventing them.
+
+**What I learned about prompting**
+
+Short, vague prompts got generic work. The results got much better when I gave Claude the actual instructions file and a concrete example of what I wanted (my Project 1 report), and when I told it plainly that I was confused.
 
 ## Repository contents
 
