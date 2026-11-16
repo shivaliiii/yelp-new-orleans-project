@@ -68,10 +68,10 @@ print(as.data.frame(zip_adjusted))
 # ---- Map 1: restaurants inside the city boundary (Step 5) --------------------
 
 p_boundary <- ggplot() +
-  geom_sf(data = city, fill = "#FBF8F5", color = theme_cols$ink, linewidth = 0.4) +
+  geom_sf(data = city, fill = "#FDFBFF", color = theme_cols$ink, linewidth = 0.4) +
   geom_sf(data = points_in_city |> arrange(stars), aes(fill = stars),
           shape = 21, color = "white", stroke = 0.3, size = 2.4) +
-  scale_fill_gradient(low = "#F8D3B3", high = "#9A3F12", limits = c(1, 5),
+  scale_fill_gradient(low = "#FFC9DA", high = "#7B4FE0", limits = c(1, 5),
                       name = "Yelp stars") +
   coord_sf(xlim = c(-90.14, -89.90), ylim = c(29.90, 30.06), expand = FALSE) +
   labs(title = "Breakfast & coffee spots cluster along the river",
@@ -95,7 +95,7 @@ p_zcta <- ggplot() +
   geom_sf_text(data = count_labels, aes(label = paste0(area_id, "\n", number_of_restaurants)),
                family = plot_family, size = 3, color = theme_cols$ink, lineheight = 0.9,
                fontface = "bold") +
-  scale_fill_gradient(low = "#FFF1E5", high = "#D9844F", na.value = "#F4F1EE",
+  scale_fill_gradient(low = "#F3EEFF", high = "#8B6CF0", na.value = "#F6F4FA",
                       name = "Breakfast &\ncoffee spots") +
   coord_sf(xlim = c(-90.14, -89.90), ylim = c(29.90, 30.06), expand = FALSE) +
   labs(title = "One downtown ZIP code has a quarter of all spots",
@@ -135,9 +135,9 @@ p_top10 <- ggplot() +
                    fill = alpha("white", 0.9), label.size = 0, label.padding = 0.18,
                    box.padding = 0.7, point.padding = 0.6, min.segment.length = 0,
                    segment.color = theme_cols$muted, max.overlaps = Inf, seed = 10) +
-  scale_fill_gradient2(low = theme_cols$below[["deep"]], mid = "#F2EEEA",
+  scale_fill_gradient2(low = theme_cols$below[["deep"]], mid = "#F6F3FB",
                        high = theme_cols$above[["deep"]], midpoint = 0,
-                       limits = c(-0.25, 0.25), oob = scales::squish, na.value = "#FAF8F6",
+                       limits = c(-0.25, 0.25), oob = scales::squish, na.value = "#FBFAFD",
                        name = "ZIP average\nnormalized score",
                        breaks = c(-0.2, 0, 0.2), labels = c("-0.2 (below usual)", "0", "+0.2 (above usual)")) +
   coord_sf(xlim = view$x, ylim = view$y, expand = FALSE) +

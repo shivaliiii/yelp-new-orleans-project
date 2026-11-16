@@ -396,7 +396,7 @@ I used **Claude** (Anthropic's AI assistant) to write and debug R code, style th
 | [`R/charts.R`](R/charts.R) | Category chart and top 10 chart |
 | [`yelp_new_orleans_project.qmd`](yelp_new_orleans_project.qmd) | Quarto source of the illustrated report |
 | [`docs/index.html`](docs/index.html) | The rendered report (self-contained HTML) |
-| [`assets/`](assets/) | Report style and fonts (same design as Project 1) |
+| [`assets/`](assets/) | Report style and fonts (pastel palette, Fredoka and Nunito) |
 | [`R/theme.R`](R/theme.R) | Shared plot style |
 | [`data/new_orleans/`](data/new_orleans/) | Summary tables (`.csv`) and the import log |
 | [`data/boundaries/`](data/boundaries/) | ZIP code and neighbourhood boundary shapes |
