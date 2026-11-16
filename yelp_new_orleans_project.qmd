@@ -304,39 +304,12 @@ A high star average from hundreds of easy reviewers is weaker evidence than a go
 
 ## How I used AI
 
-I used **Claude** (Anthropic's AI assistant) throughout this project, mainly to write and debug R code, design charts and maps, and check my work against the assignment. Commits written with Claude are marked `Co-Authored-By: Claude` in the repository history.
+I used **Claude** (Anthropic's AI assistant) to write and debug R code, style the charts and report, and check my work against the assignment. Commits written with Claude are marked `Co-Authored-By: Claude` in the repository history.
 
-**What I used it for**
+**Example 1: Homework 6 checkpoint.** I asked *"can u look at my canvas i wanna finish homework 6 on canvas"*. Claude checked my README and caught two mistakes (25 vs. 24 ZIP codes, and mislabelled review counts), but its fix was git commands I didn't understand. I reprompted with *"idk im confused"*, and it walked me through getting the code onto GitHub instead.
 
-- Checking my Step 1–6 README against the Homework 6 checkpoint, and pushing the code to GitHub.
-- Step 7: reviewer baselines, adjusted scores, the top 10 and the final map with ZIP code boundaries.
-- Adding a third geographic system (city neighbourhoods) and the robustness checks on the top 10.
-- Styling the charts, maps and report to match my Project 1 report.
-- Checking the finished repository against the project instructions.
+**Example 2: Making the report stand out.** I uploaded the instructions and wrote *"i want to get done w the projecr"*. Claude finished Step 7 and the top 10, but the report looked plain. I reprompted with *"i told u it needs to look like monte carlo project, put in pretty graphs and amke writing stand out"*, and it restyled the report to match my Project 1 and added two charts.
 
-**Specific prompts and how I reprompted**
+**Example 3: Final check.** I asked Claude to *"make my project stand out"*, but it couldn't open the instructions from Canvas, so its ideas were generic. I uploaded the instructions file directly, and it then checked all 10 deliverables and found this section was missing.
 
-**Example 1: the Homework 6 checkpoint**
-
-- **First prompt:** *"can u look at my canvas i wanna finish homework 6 on canvas"*
-- **What happened:** Claude found that Homework 6 was a checkpoint on Project 2 (Steps 1–6). It asked me to pick a theme, and I chose breakfast / coffee / bakeries. I then uploaded my README. Claude caught two mistakes in it: it said "25 ZIP codes" where my table had 24 areas, and it called all ~7 million reviews "Louisiana-area reviews". It also listed Step 6 items I was still missing, and noticed my GitHub repo was empty.
-- **How I reprompted:** I sent the repo link, but it was still empty. Claude gave me git commands to run, and I replied *"idk im confused"*.
-- **What changed:** Instead of more instructions, Claude walked me through getting the code onto GitHub, and the Step 1–6 work was pushed.
-
-**Example 2: making the report stand out**
-
-- **First prompt:** I uploaded the project instructions and wrote *"i want to get done w the projecr"*.
-- **What happened:** Claude finished Step 7, the top 10 with a final map, the README, and a third geographic system. But the report was plain and didn't look like my Project 1.
-- **How I reprompted:** *"i told u it needs to look like monte carlo project, put in pretty graphs and amke writing stand out"*
-- **What changed:** Claude reused my Project 1 style file and fonts, added two new charts (the ranked top 10 and the category chart), and added "In plain English" boxes. It also made a header image for the README, because GitHub can't show custom styling there.
-
-**Example 3: a final check against the assignment**
-
-- **First prompt:** *"can u access my canvas and i have math 167r project 2 due today and i need ur help to make my project stand out"*
-- **What went wrong:** Claude found the assignment and read my repository, but couldn't open the instructions file from Canvas. Its suggestions were general ideas, not a check against the actual requirements.
-- **How I reprompted:** I gave it the instructions file directly.
-- **What changed:** Claude checked the project against all 10 required deliverables. It found that this AI-prompts section was missing and that the large-data section described my solutions but not the problems I ran into. It asked what problems I actually had instead of inventing them.
-
-**What I learned about prompting**
-
-Short, vague prompts got generic work. The results got much better when I gave Claude the actual instructions file and a concrete example of what I wanted (my Project 1 report), and when I told it plainly that I was confused.
+**What I learned:** vague prompts got generic work. Giving Claude the real instructions and an example of what I wanted (my Project 1) worked much better.

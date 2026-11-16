@@ -4166,80 +4166,30 @@ business ID.</p>
 </section>
 <section id="how-i-used-ai" class="level2" data-number="11">
 <h2 data-number="11" class="anchored" data-anchor-id="how-i-used-ai"><span class="header-section-number">11</span> How I used AI</h2>
-<p>I used <strong>Claude</strong> (Anthropic’s AI assistant) throughout
-this project, mainly to write and debug R code, design charts and maps,
-and check my work against the assignment. Commits written with Claude
-are marked <code>Co-Authored-By: Claude</code> in the repository
-history.</p>
-<p><strong>What I used it for</strong></p>
-<ul>
-<li>Checking my Step 1–6 README against the Homework 6 checkpoint, and
-pushing the code to GitHub.</li>
-<li>Step 7: reviewer baselines, adjusted scores, the top 10 and the
-final map with ZIP code boundaries.</li>
-<li>Adding a third geographic system (city neighbourhoods) and the
-robustness checks on the top 10.</li>
-<li>Styling the charts, maps and report to match my Project 1
-report.</li>
-<li>Checking the finished repository against the project
-instructions.</li>
-</ul>
-<p><strong>Specific prompts and how I reprompted</strong></p>
-<p><strong>Example 1: the Homework 6 checkpoint</strong></p>
-<ul>
-<li><strong>First prompt:</strong> <em>“can u look at my canvas i wanna
-finish homework 6 on canvas”</em></li>
-<li><strong>What happened:</strong> Claude found that Homework 6 was a
-checkpoint on Project 2 (Steps 1–6). It asked me to pick a theme, and I
-chose breakfast / coffee / bakeries. I then uploaded my README. Claude
-caught two mistakes in it: it said “25 ZIP codes” where my table had 24
-areas, and it called all ~7 million reviews “Louisiana-area reviews”. It
-also listed Step 6 items I was still missing, and noticed my GitHub repo
-was empty.</li>
-<li><strong>How I reprompted:</strong> I sent the repo link, but it was
-still empty. Claude gave me git commands to run, and I replied <em>“idk
-im confused”</em>.</li>
-<li><strong>What changed:</strong> Instead of more instructions, Claude
-walked me through getting the code onto GitHub, and the Step 1–6 work
-was pushed.</li>
-</ul>
-<p><strong>Example 2: making the report stand out</strong></p>
-<ul>
-<li><strong>First prompt:</strong> I uploaded the project instructions
-and wrote <em>“i want to get done w the projecr”</em>.</li>
-<li><strong>What happened:</strong> Claude finished Step 7, the top 10
-with a final map, the README, and a third geographic system. But the
-report was plain and didn’t look like my Project 1.</li>
-<li><strong>How I reprompted:</strong> <em>“i told u it needs to look
-like monte carlo project, put in pretty graphs and amke writing stand
-out”</em></li>
-<li><strong>What changed:</strong> Claude reused my Project 1 style file
-and fonts, added two new charts (the ranked top 10 and the category
-chart), and added “In plain English” boxes. It also made a header image
-for the README, because GitHub can’t show custom styling there.</li>
-</ul>
-<p><strong>Example 3: a final check against the assignment</strong></p>
-<ul>
-<li><strong>First prompt:</strong> <em>“can u access my canvas and i
-have math 167r project 2 due today and i need ur help to make my project
-stand out”</em></li>
-<li><strong>What went wrong:</strong> Claude found the assignment and
-read my repository, but couldn’t open the instructions file from Canvas.
-Its suggestions were general ideas, not a check against the actual
-requirements.</li>
-<li><strong>How I reprompted:</strong> I gave it the instructions file
-directly.</li>
-<li><strong>What changed:</strong> Claude checked the project against
-all 10 required deliverables. It found that this AI-prompts section was
-missing and that the large-data section described my solutions but not
-the problems I ran into. It asked what problems I actually had instead
-of inventing them.</li>
-</ul>
-<p><strong>What I learned about prompting</strong></p>
-<p>Short, vague prompts got generic work. The results got much better
-when I gave Claude the actual instructions file and a concrete example
-of what I wanted (my Project 1 report), and when I told it plainly that
-I was confused.</p>
+<p>I used <strong>Claude</strong> (Anthropic’s AI assistant) to write
+and debug R code, style the charts and report, and check my work against
+the assignment. Commits written with Claude are marked
+<code>Co-Authored-By: Claude</code> in the repository history.</p>
+<p><strong>Example 1: Homework 6 checkpoint.</strong> I asked <em>“can u
+look at my canvas i wanna finish homework 6 on canvas”</em>. Claude
+checked my README and caught two mistakes (25 vs. 24 ZIP codes, and
+mislabelled review counts), but its fix was git commands I didn’t
+understand. I reprompted with <em>“idk im confused”</em>, and it walked
+me through getting the code onto GitHub instead.</p>
+<p><strong>Example 2: Making the report stand out.</strong> I uploaded
+the instructions and wrote <em>“i want to get done w the projecr”</em>.
+Claude finished Step 7 and the top 10, but the report looked plain. I
+reprompted with <em>“i told u it needs to look like monte carlo project,
+put in pretty graphs and amke writing stand out”</em>, and it restyled
+the report to match my Project 1 and added two charts.</p>
+<p><strong>Example 3: Final check.</strong> I asked Claude to <em>“make
+my project stand out”</em>, but it couldn’t open the instructions from
+Canvas, so its ideas were generic. I uploaded the instructions file
+directly, and it then checked all 10 deliverables and found this section
+was missing.</p>
+<p><strong>What I learned:</strong> vague prompts got generic work.
+Giving Claude the real instructions and an example of what I wanted (my
+Project 1) worked much better.</p>
 </section>
 
 
