@@ -305,11 +305,3 @@ A high star average from hundreds of easy reviewers is weaker evidence than a go
 ## How I used AI
 
 I used **Claude** (Anthropic's AI assistant) to write and debug R code, style the charts and report, and check my work against the assignment. Commits written with Claude are marked `Co-Authored-By: Claude` in the repository history.
-
-**Example 1: Homework 6 checkpoint.** I asked *"can u look at my canvas i wanna finish homework 6 on canvas"*. Claude checked my README and caught two mistakes (25 vs. 24 ZIP codes, and mislabelled review counts), but its fix was git commands I didn't understand. I reprompted with *"idk im confused"*, and it walked me through getting the code onto GitHub instead.
-
-**Example 2: Making the report stand out.** I uploaded the instructions and wrote *"i want to get done w the projecr"*. Claude finished Step 7 and the top 10, but the report looked plain. I reprompted with *"i told u it needs to look like monte carlo project, put in pretty graphs and amke writing stand out"*, and it restyled the report to match my Project 1 and added two charts.
-
-**Example 3: Final check.** I asked Claude to *"make my project stand out"*, but it couldn't open the instructions from Canvas, so its ideas were generic. I uploaded the instructions file directly, and it then checked all 10 deliverables and found this section was missing.
-
-**What I learned:** vague prompts got generic work. Giving Claude the real instructions and an example of what I wanted (my Project 1) worked much better.
